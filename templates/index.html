@@ -9,82 +9,120 @@
     <style>
         body {
             font-family: 'Roboto', sans-serif;
-            background-color: #f8f9fa;
+            background: #eef2f7; /* Soft light blue-gray background */
+            min-height: 100vh;
         }
+
+        .navbar {
+            background-color: #1f3a93; /* Deep blue navbar */
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        .navbar-brand {
+            color: #ffffff !important;
+        }
+
+        .navbar-nav .nav-link {
+            color: #dfe6e9 !important;
+        }
+
         .container {
-            max-width: 800px;
-            margin-top: 50px;
+            max-width: 700px;
+            margin-top: 60px;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
+
         .static-title {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #28a745;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1f3a93; /* Match navbar color */
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
-        .form-control {
-            height: 200px;
-            border: 2px solid #28a745;
-            font-size: 1.2rem;
+
+        textarea.form-control {
+            height: 180px;
+            border: 2px solid #1f3a93; /* Deep blue border */
+            font-size: 1rem;
+            padding: 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
         }
+
+        textarea.form-control:focus {
+            border-color: #3f51b5; /* Lighter blue on focus */
+            box-shadow: 0 0 10px rgba(63, 81, 181, 0.3);
+        }
+
+        button.btn-analyze {
+            font-size: 1.1rem;
+            padding: 10px;
+            border-radius: 8px;
+            background: #ff6b6b; /* Vibrant coral */
+            border: none;
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        button.btn-analyze:hover {
+            background: #e55050; /* Darker coral on hover */
+        }
+
         .result {
             text-align: center;
-            font-size: 24px;
-            margin-top: 20px;
+            font-size: 1.3rem;
+            margin-top: 25px;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: 600;
             color: #fff;
-            padding: 10px;
-            border-radius: 5px;
         }
+
         .bullying {
-            background-color: #dc3545;
+            background-color: #ff4757; /* Red */
         }
+
         .non-bullying {
-            background-color: #28a745;
+            background-color: #2ed573; /* Green */
         }
     </style>
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Cyberbullying Detection Using Python</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand font-weight-bold" href="#">Cyberbullying Detection</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
-                </li>
+                <li class="nav-item active"><a class="nav-link" href="#">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
             </ul>
         </div>
     </nav>
 
     <div class="container">
-        <div class="static-title">Cyberbullying Detection Using Python</div>
+        <div class="static-title">Cyberbullying Detection</div>
         <form method="POST">
             <div class="form-group">
-                <textarea name="text" class="form-control" rows="4" placeholder="Enter text to analyze..."></textarea>
+                <textarea name="text" class="form-control" placeholder="Enter text to analyze..."></textarea>
             </div>
-            <button type="submit" class="btn btn-success btn-block">Analyze</button>
+            <button type="submit" class="btn-analyze btn-block">Analyze</button>
         </form>
+
         {% if prediction is not none %}
             <div class="result {% if prediction == 1 %}bullying{% else %}non-bullying{% endif %}">
-                {% if prediction == 1 %}
-                    Bullying
-                {% else %}
-                    Non-Bullying
-                {% endif %}
+                {% if prediction == 1 %} Bullying {% else %} Non-Bullying {% endif %}
             </div>
         {% endif %}
     </div>
 
-    <!-- Bootstrap JS and dependencies -->
+    <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
